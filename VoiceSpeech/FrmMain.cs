@@ -32,12 +32,8 @@ namespace VoiceSpeech
                 {
                     spVoice.Resume();
                 }
-                spVoice.Voice = spVoice.GetVoices(string.Empty, string.Empty).Item(0);
+                //spVoice.Voice = spVoice.GetVoices(string.Empty, string.Empty).Item(1);
                 spVoice.Speak(txtContent.Text, spFlags);
-                //Item(0)单词男声Sam
-                //Item(1)单词男声Mike
-                //Item(2)单词女声Mary
-                //Item(3)中文发音，如果是英文，就依单词字母一个一个发音
 
                 //生成文件
                 //try
