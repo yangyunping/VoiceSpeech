@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using SpeechLib;
 
@@ -28,26 +29,9 @@ namespace VoiceSpeech
         {
             try
             {
-                if (spVoice != null)
-                {
-                    spVoice.Resume();
-                }
-                //spVoice.Voice = spVoice.GetVoices(string.Empty, string.Empty).Item(1);
-                spVoice.Speak(txtContent.Text, spFlags);
-
-                //生成文件
-                //try
-                //{
-                //    SpeechStreamFileMode SpFileMode = SpeechStreamFileMode.SSFMCreateForWrite;
-                //    SpFileStream SpFileStream = new SpFileStream();
-                //    SpFileStream.Open(@"C:\Users\EMEWE\Desktop\Test.wav", SpFileMode, false);
-                //    spVoice.AudioOutputStream = SpFileStream;//设定voice的输出为Stream
-                //    spVoice.Speak(txtContent.Text.Trim(), spFlags);
-                //    spVoice.WaitUntilDone(Timeout.Infinite);//Using System.Threading;
-                //    SpFileStream.Close();
-                //    MessageBox.Show("生成成功！");
-                //}
-                //catch { MessageBox.Show("生成失败！"); }
+                Task.Factory.StartNew(new Action(()=>
+                  SpeechRead.NewRead(txtContent.Text)
+                ));
             }
             catch { }
         }

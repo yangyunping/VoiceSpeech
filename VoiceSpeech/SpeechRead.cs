@@ -11,7 +11,7 @@ namespace VoiceSpeech
     {
         public static void NewRead(string content)
         {
-            string wavPath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "Sounds\\ring.wav";//要读的音频文件地址
+            string wavPath = System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "ring.wav";//要读的音频文件地址
             SpVoiceClass pp = new SpeechLib.SpVoiceClass();
             SpeechLib.SpFileStreamClass spFs = new SpFileStreamClass();
             spFs.Open(wavPath, SpeechLib.SpeechStreamFileMode.SSFMOpenForRead, true);
@@ -25,11 +25,23 @@ namespace VoiceSpeech
             spVoice.Rate = -5;//速度
             spVoice.Volume = 100;
             //播放
-            spVoice.WaitUntilDone(-1);
             spVoice.SpeakStream(Istream, spFlags);
             spVoice.WaitUntilDone(-1);
             spVoice.Speak(content, spFlags);
             spFs.Close();
+            //生成文件
+            //try
+            //{
+            //    SpeechStreamFileMode SpFileMode = SpeechStreamFileMode.SSFMCreateForWrite;
+            //    SpFileStream SpFileStream = new SpFileStream();
+            //    SpFileStream.Open(@"C:\Users\EMEWE\Desktop\Test.wav", SpFileMode, false);
+            //    spVoice.AudioOutputStream = SpFileStream;//设定voice的输出为Stream
+            //    spVoice.Speak(txtContent.Text.Trim(), spFlags);
+            //    spVoice.WaitUntilDone(Timeout.Infinite);//Using System.Threading;
+            //    SpFileStream.Close();
+            //    MessageBox.Show("生成成功！");
+            //}
+            //catch { MessageBox.Show("生成失败！"); }
         }
     }
 }
